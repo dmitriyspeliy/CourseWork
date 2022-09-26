@@ -2,6 +2,7 @@ package ru.sky.pro;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 
 public class Employee {
@@ -59,5 +60,16 @@ public class Employee {
         return "Employee{" + "fullName='" + fullName + '\'' + ", department='" + department + '\'' + ", salary=" + salary + ", id=" + id + '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return Double.compare(employee.salary, salary) == 0 && id == employee.id && Objects.equals(fullName, employee.fullName) && Objects.equals(department, employee.department);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(fullName, department, salary, id);
+    }
 }
